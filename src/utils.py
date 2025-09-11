@@ -18,7 +18,10 @@ def save_json(path,data):
     except Exception as e: 
         print(f"Error with saving json file: {e}")
         return{}
-    
-    
+
+def exit_json(path, data):
+    print("Exiting program... Goodbye!")
+    exit()
+
 
             

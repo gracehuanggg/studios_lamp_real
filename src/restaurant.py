@@ -1,5 +1,20 @@
+show_options():
+    def view_menu
+handle_options():
+    if user_choice == (any of my options)
+        execute option
+    if user_choice == view_menu
+
+def handle_options (self, resataurant_data, options, file_path):
+        menu_categories = restaurant_data ['menu']
+        user_choice: input ("/n PLease enter either the Option ID or the Option Title: ")
+        self.execute_user_option
+
+
 class Restaurant:
     def view_all(self): 
+    def add_item(self):
+    def 
 
 
 # Use multiple source files:

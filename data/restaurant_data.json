@@ -1,0 +1,46 @@
+{
+    "name": "Miga House",
+    "location": "172 West 4th Street, New York, NY 10014",
+    "cusine": "Korean",
+    "menu": [
+     {
+            "category": "Appetizer",
+            "id": 1,
+            "items": [
+                {"id": 1, "name": "Kimchi Pancake", "price": 5.99, "in_stock": true},
+                {"id": 2, "name": "Rose Tepookki", "price": 7.49, "in_stock": true},
+                {"id": 3, "name": "Volcano Egg", "price": 6.49, "in_stock": true},
+                {"id": 4, "name": "Banchan Platter", "price": 8.99, "in_stock": true},
+                {"id": 5, "name": "Yaki Mandu", "price": 7.99, "in_stock": false},
+                {"id": 6, "name": "Fried Dumplings", "price": 6.99, "in_stock": true},
+                {"id": 7, "name": "Veggie Kimbap", "price": 5.49, "in_stock": true},
+                {"id": 8, "name": "Japchae", "price": 6.49, "in_stock": false}
+                {"id": 9, "name": "Corn Cheese", "price": 3.99, "in_stock": true}
+            ]
+        },
+     {
+            "category": "Entree",
+            "id": 2,
+            "items": [
+                {"id": 10, "name": "Beef Bibimbap", "price": 16.99, "in_stock": true},
+                {"id": 11, "name": "Vegetable Bibimbap", "price": 14.49, "in_stock": true},
+                {"id": 12, "name": "Kimchi Tofu Stew", "price": 15.49, "in_stock": true},
+                {"id": 13, "name": "Soy Bean Cold Noodles", "price": 15.49, "in_stock": true},
+                {"id": 14, "name": "Kimchi Fried Rice with Pork", "price": 16.99, "in_stock": true},
+                {"id": 15, "name": "Jajangmyeon", "price": 15.99, "in_stock": true},
+                {"id": 16, "name": "Beef Bulgogi", "price": 12.99, "in_stock": true},
+                {"id": 17, "name": "Korean Fried Chicken", "price": 14.99, "in_stock": true},
+            ]
+        },
+        {
+            "category": "Dessert",
+            "id": 3,
+            "items": [
+                {"id": 20, "name": "Bingsu", "price": 7.99, "in_stock": true},
+                {"id": 21, "name": "Subak Hwaechae", "price": 6.49, "in_stock": true},
+                {"id": 22, "name": "Hotteok", "price": 5.99, "in_stock": true},
+                {"id": 23, "name": "Sikhye", "price": 6.99, "in_stock": false}
+            ]
+        }
+]
+}
