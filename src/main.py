@@ -5,14 +5,7 @@ from restaurant import load_data
 
 FILE_PATH = "../data/restaurant_data.json"
 
-def load_data():
-    
-    
-    with FILE_PATH.open
 
-
-
-def save_data() 
 
 
 def view_menu(menu):
