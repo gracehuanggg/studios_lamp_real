@@ -1,50 +1,35 @@
-from json:
-    from pathlib import Path: 
-show_options():
-    def view_menu
-handle_options():
-    if user_choice == (any of my options)
-        execute option
-    if user_choice == view_menu
-
-def handle_options (self, resataurant_data, options, file_path):
-        menu_categories = restaurant_data ['menu']
-        user_choice: input ("/n PLease enter either the Option ID or the Option Title: ")
-        self.execute_user_option
-
-
-class Restaurant:
-    def view_all(self): 
-    def add_item(self):
-    def update_item(self):
-         
-
-
-# Use multiple source files:
-
-# Restaurant class in restaurant.py
-# MenuItem class in menu_item.py
-# main.py imports and uses both
-# Load data from a JSON file (restaurant_data.json).
-
-# Provide a menu for the user to choose actions.
-
-# Implement at least five different functions:
-
-# View all menu items
-# Search for a menu item by key (id, name, or category)
-# Add a new menu item
-# Update an existing menu item
-# Delete a menu item
-# Save changes back to the JSON file
-# Validate input where possible (wrong menu choices, invalid ids).
-
 import json
 from menu_item import MenuItem
 
-class Restaurant:
-    def __init__(self, name, location, cuisine, categories):
-        self.name = name
-        self.location = location
-        self.cuisine = cuisine
-        self.categories = categories
+
+class Restaurant: #Manages the collection of menu items and handles data persistence.
+    def __init__(self, filepath):
+        self.filepath = filepath
+        # The menu is now a list of MenuItem objects, not dictionaries.
+        self.menu = self._load_menu()
+
+    def _load_menu(self): #Loads the menu from a JSON file and converts each item into a MenuItem object.
+        try:
+            with open(self.filepath, 'r') as file:
+                data = json.load(file)  # data is a list of dictionaries
+                # Use a list comprehension and the from_dict classmethod for a clean conversion
+                return [MenuItem.from_dict(item_dict) for item_dict in data]
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+
+    def save_menu(self): #Saves the current menu (list of objects) back to the JSON file.
+        # Convert each MenuItem object back to a dictionary before saving
+        data_to_save = [item.to_dict() for item in self.menu]
+        with open(self.filepath, 'w') as file:
+            json.dump(data_to_save, file, indent=4)
+
+    def add_item(self, name, category, price): #
+        if self.menu:
+            new_id = max(item.id for item in self.menu) + 1
+        else:
+            new_id = 1
+
+        new_item = MenuItem(id=new_id, name=name, category=category, price=price)
+        self.menu.append(new_item)
+        return new_item
+    
