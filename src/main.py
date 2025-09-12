@@ -1,83 +1,100 @@
-import json
-import time
-from menu_item import MenuItem
-from restaurant import load_data
+from restaurant import Restaurant
 
-FILE_PATH = "../data/restaurant_data.json"
+DATA_FILE_PATH = '../data/restaurant_data.json'
 
 
+def print_menu_items(items):#print a list of menu items
+    if not items:
+        print("No items to display.")
+        return
 
-
-def view_menu(menu):
-    print("--- Menu ---")
-    if not menu:
-        print("No dishes yet.")
-    else:
-        for dish in menu:
-            print(f"{dish['id']}: {dish['name']} - ${dish['price']}")
-
-def add_item(menu):
-    name = input("Dish name: ")
-    price = float(input("Price: "))
-    next_id = 0
-    for d in menu:
-        if d["id"] > next_id:
-            next_id = d["id"]
-    next_id += 1
-    menu.append({"id": next_id, "name": name, "price": price})
-    print(f"Added {name} with ID {next_id}.")
-
-def update_item(menu):
-    target = int(input("ID to update: "))
-    for d in menu:
-        if d["id"] == target:
-            new_name = input("New name (blank to keep): ")
-            new_price = input("New price (blank to keep): ")
-            if new_name != "":
-                d["name"] = new_name
-            if new_price != "":
-                d["price"] = float(new_price)
-            print(f"Dish ID {target} updated.")
-            return
-    print("Dish not found.")
-
-def delete_item(menu):
-    target = int(input("You want to delete which dish ID? "))
-    for i in range(len(menu)):
-        if menu[i]["id"] == target:
-            removed = menu[i]["name"]
-            del menu[i]
-            print(f"Deleted {removed} (ID {target}).")
-            return
-    print("Dish not found.")
+    print("\n---------- Menu ----------")
+    for item in items:
+        status = "In Stock" if item.in_stock else "Out of Stock"
+        print(
+            f"ID: {item.id:<3} | Name: {item.name:<28} | Category: {item.category:<12} | Price: ${item.price:.2f} | Status: {status}")
+    print("--------------------------\n")
 
 def main():
-    menu = load_data(FILE_PATH)
+    # Create an instance of the Restaurant class. This object will manage everything.
+    my_restaurant = Restaurant(DATA_FILE_PATH)
+
     while True:
-        print("1. View menu")
-        print("2. Add dish")
-        print("3. Update dish")
-        print("4. Delete dish")
-        print("5. Save changes")
-        print("0. Exit")
-        choice = input("Choose: ")
-        if choice == "1":
-            view_menu(menu)
-        elif choice == "2":
-            add_item(menu)
-        elif choice == "3":
-            update_item(menu)
-        elif choice == "4":
-            delete_item(menu)
-        elif choice == "5":
-            save_data(FILE_PATH, menu)
-            print("Changes saved.")
-        elif choice == "0":
-            save_data(FILE_PATH, menu)
-            print("Goodbye. All changes saved.")
+        print("\n======= Restaurant Management System =======")
+        print("  1. View Menu")
+        print("  2. Search Menu")
+        print("  3. Add New Item")
+        print("  4. Update Item")
+        print("  5. Delete Item")
+        print("  0. Exit and Save")
+        print("========================================")
+
+        choice = input("Enter your choice (0-5): ")
+
+        if choice == '1':
+            print_menu_items(my_restaurant.menu)
+
+        elif choice == '2':
+            handle_search_menu(my_restaurant)
+
+        elif choice == '3':
+            try:
+                name = input("Enter item name: ")
+                category = input("Enter item category: ")
+                price = float(input("Enter item price: "))
+                if not name or not category:
+                    raise ValueError("Name and category cannot be empty.")
+
+                added_item = my_restaurant.add_item(name, category, price)
+                print(f"Successfully added '{added_item.name}' with ID {added_item.id}.")
+            except ValueError as e:
+                print(f"Invalid input: {e}")
+
+        elif choice == '4':
+            try:
+                item_id = int(input("Enter the ID of the item to update: "))
+                item = my_restaurant.find_item_by_id(item_id)
+
+                if not item:
+                    print("Item not found.")
+                    continue
+
+                print(f"Updating item: {item.name}. Press Enter to skip.")
+                new_data = {}
+
+                new_name = input(f"New name (current: {item.name}): ")
+                if new_name: new_data['name'] = new_name
+
+                new_category = input(f"New category (current: {item.category}): ")
+                if new_category: new_data['category'] = new_category
+
+                new_price_str = input(f"New price (current: {item.price}): ")
+                if new_price_str: new_data['price'] = float(new_price_str)
+
+                my_restaurant.update_item(item_id, new_data)
+                print("Item updated successfully.")
+
+            except ValueError:
+                print("Invalid input: ID and price must be numbers.")
+
+        elif choice == '5':
+            try:
+                item_id = int(input("Enter the ID of the item to delete: "))
+                if my_restaurant.delete_item(item_id):
+                    print(f"Item with ID {item_id} has been deleted.")
+                else:
+                    print(f"Item with ID {item_id} not found.")
+            except ValueError:
+                print("Invalid input: ID must be a number.")
+
+        elif choice == '0':
+            my_restaurant.save_menu()
+            print("Data saved. Goodbye!")
             break
+
         else:
-            print("Invalid choice.")
+            print("Invalid choice. Please enter a number between 0 and 5.")
+
 
 if __name__ == "__main__":
     main()
