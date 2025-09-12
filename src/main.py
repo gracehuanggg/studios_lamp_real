@@ -15,6 +15,27 @@ def print_menu_items(items):#print a list of menu items
             f"ID: {item.id:<3} | Name: {item.name:<28} | Category: {item.category:<12} | Price: ${item.price:.2f} | Status: {status}")
     print("--------------------------\n")
 
+def handle_search_menu(restaurant_obj):  #Handles the user interaction for searching menu items.
+    print("\n--- Search Menu ---")
+    print("Search by: 1. Name  2. Category")
+    choice = input("Enter your choice: ")
+
+    if choice not in ['1', '2']:
+        print("Invalid choice.")
+        return
+
+    term = input("Enter search term: ")
+    search_by = 'name' if choice == '1' else 'category'
+
+    results = restaurant_obj.search_items(term, search_by)
+
+    if results:
+        print(f"\nFound {len(results)} item(s):")
+        print_menu_items(results)
+    else:
+        print("No items found matching your search.")
+
+
 def main():
     # Create an instance of the Restaurant class. This object will manage everything.
     my_restaurant = Restaurant(DATA_FILE_PATH)
