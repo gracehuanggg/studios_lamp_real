@@ -15,6 +15,7 @@ def print_menu_items(items):#print a list of menu items
             f"ID: {item.id:<3} | Name: {item.name:<28} | Category: {item.category:<12} | Price: ${item.price:.2f} | Status: {status}")
     print("--------------------------\n")
 
+
 def handle_search_menu(restaurant_obj):  #Handles the user interaction for searching menu items.
     print("\n--- Search Menu ---")
     print("Search by: 1. Name  2. Category")
