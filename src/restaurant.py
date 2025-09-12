@@ -32,4 +32,3 @@ class Restaurant: #Manages the collection of menu items and handles data persist
         new_item = MenuItem(id=new_id, name=name, category=category, price=price)
         self.menu.append(new_item)
         return new_item
-    
