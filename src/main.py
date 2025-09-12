@@ -1,6 +1,6 @@
 import json
 import time
-from menu_item import menu_item
+from menu_item import MenuItem
 from restaurant import load_data
 
 FILE_PATH = "../data/restaurant_data.json"
