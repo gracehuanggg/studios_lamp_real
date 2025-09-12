@@ -7,7 +7,6 @@ FILE_PATH = "../data/restaurant_data.json"
 
 
 
-
 def view_menu(menu):
     print("--- Menu ---")
     if not menu:
