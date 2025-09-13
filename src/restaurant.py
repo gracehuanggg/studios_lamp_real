@@ -32,3 +32,48 @@ class Restaurant: #Manages the collection of menu items and handles data persist
         new_item = MenuItem(id=new_id, name=name, category=category, price=price)
         self.menu.append(new_item)
         return new_item
+    
+    def add_item(self, name, category, price): #
+        if self.menu:
+            new_id = max(item.id for item in self.menu) + 1
+        else:
+            new_id = 1
+
+        new_item = MenuItem(id=new_id, name=name, category=category, price=price)
+        self.menu.append(new_item)
+        return new_item
+
+    def find_item_by_id(self, item_id):#Finds and returns a MenuItem object by its ID.
+        for item in self.menu:
+            if item.id == item_id:
+                return item
+        return None
+
+    def search_items(self, term, search_by='name'):#Searches for items by name or category.
+        term = term.lower()
+        results = []
+        for item in self.menu:
+            if search_by == 'name' and term in item.name.lower():
+                results.append(item)
+            elif search_by == 'category' and term in item.category.lower():
+                results.append(item)
+        return results
+
+    def update_item(self, item_id, new_data): #Updates an existing MenuItem object's attributes.
+        item_to_update = self.find_item_by_id(item_id)
+        if item_to_update:
+            if new_data.get('name'):
+                item_to_update.name = new_data['name']
+            if new_data.get('category'):
+                item_to_update.category = new_data['category']
+            if new_data.get('price') is not None:
+                item_to_update.price = float(new_data['price'])
+            return True
+        return False
+
+    def delete_item(self, item_id): #Deletes a MenuItem object from the menu by its ID.
+        item_to_delete = self.find_item_by_id(item_id)
+        if item_to_delete:
+            self.menu.remove(item_to_delete)
+            return True
+        return False
