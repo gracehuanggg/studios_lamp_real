@@ -11,7 +11,7 @@ class Restaurant: #Manages the collection of menu items and handles data persist
         # The menu is now a list of MenuItem objects, not dictionaries.
         self.menu = self._load_menu()
 
-    def _load_menu(self): #Loads the menu from a JSON file and converts each item into a MenuItem object.
+    def load_menu(self): #Loads the menu from a JSON file and converts each item into a MenuItem object.
         try:
             with open(self.filepath, 'r') as file:
                 data = json.load(file)
