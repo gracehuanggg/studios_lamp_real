@@ -39,14 +39,40 @@ Our project follows a clean, multi-file layout with each part serving a clear pu
 3.  Locate and run the `src/main.py` file directly (usually by clicking the "Run" button in the editor).
 4.  Follow the menu options displayed in the terminal or console window below to operate the application.
 
+## Examples
+======= Restaurant Management System =======
+  1. View Menu (All Items)
+  2. View Menu by Category
+  3. Search Menu
+  4. Add New Item
+  5. Update Item
+  6. Delete Item
+  0. Exit and Save
+========================================
+Enter your choice (0-6): 4
+Enter item name: Korean BBQ Wings
+Enter item category: Entree
+Enter item price: 16.99
+Successfully added 'Korean BBQ Wings' with ID 24.
+========================================
+Enter your choice (0-6): 5
+Enter the ID of the item to update: 1
+Updating item: Kimchi Pancake. Press Enter to skip.
+New name (current: Kimchi Pancake): Kimchi Fried Rice
+New category (current: Appetizer): Entree
+New price (current: 5.99): 16.99
+Item updated successfully.
+
 ## Team Collaboration and Roles
 
 This project was completed through the collaboration of two students: Grace and Mia. We efficiently completed the project through clear role assignments and timely communication.
 
 * **Grace (Partner A - Backend Architect)**
-    * Responsible for the project's core data structure and logic. Mia and Grace designed and wrote the `menu_item.py` file, defining the data model for a single menu item.
-    * Grace also wrote the `Restaurant` class in the `restaurant.py` file, implementing all backend functionalities, including loading/saving the JSON file, and adding, deleting, updating, and searching for items.
+    * Owner of the branch `main`
+    * Mia and Grace designed and wrote the `main.py` file, responsible for calling the backend functions created by Grace to display data to the user, ensuring the application is both user-friendly and stable.
+* Grace also wrote the `Restaurant` class in the `restaurant.py` file, implementing all backend functionalities, including loading/saving the JSON file, and adding, deleting, updating, and searching for items.
 
 * **Mia (Partner B - User Experience Officer)**
-    * Responsible for the project's user interface and interaction flow. She wrote the `main.py` file, creating the main menu and all the prompts that the user sees. At the same time, Mia also worked with Grace to write the `menu_item.py` file, defining the data model for a single dish.
-    * She included the main program loop and was responsible for calling the backend functions created by Grace to display data to the user, ensuring the application is both user-friendly and stable.
+   * Owner of the branch `Mia`
+* Responsible for the project's user interface and interaction flow. Mia and Grace designed and wrote the main.py file, creating the main menu and all the prompts that the user sees. 
+* Responsible for the project's core data structure and logic. Mia wrote the menu_item.py file, defining the data model for a single menu item.
