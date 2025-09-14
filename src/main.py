@@ -1,4 +1,5 @@
 from restaurant import Restaurant
+import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # findpath to help run in Visual Studio Code properly
 DATA_FILE_PATH = os.path.join(BASE_DIR, '..', 'data', 'restaurant_data.json')
