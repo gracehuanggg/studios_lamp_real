@@ -5,21 +5,77 @@ from menu_item import MenuItem
 class Restaurant: #Manages the collection of menu items and handles data persistence.
     def __init__(self, filepath):
         self.filepath = filepath
+        # Store restaurant info and original data structure
+        self.restaurant_info = {}
+        self.original_format = 'simple'  # 'simple' or 'nested'
         # The menu is now a list of MenuItem objects, not dictionaries.
-        self.menu = self._load_menu()
+        self.menu = self.load_menu()
 
-    def _load_menu(self): #Loads the menu from a JSON file and converts each item into a MenuItem object.
+    def load_menu(self): #Loads the menu from a JSON file and converts each item into a MenuItem object.
         try:
             with open(self.filepath, 'r') as file:
-                data = json.load(file)  # data is a list of dictionaries
-                # Use a list comprehension and the from_dict classmethod for a clean conversion
-                return [MenuItem.from_dict(item_dict) for item_dict in data]
+                data = json.load(file)
+
+                # Check if data is a simple list (old format) or nested structure (new format)
+                if isinstance(data, list):
+                    # Old format: data is a list of dictionaries
+                    self.original_format = 'simple'
+                    return [MenuItem.from_dict(item_dict) for item_dict in data]
+                elif isinstance(data, dict) and 'menu' in data:
+                    # New format: data is a dictionary with nested menu structure
+                    self.original_format = 'nested'
+                    # Store restaurant info
+                    self.restaurant_info = {
+                        'name': data.get('name', ''),
+                        'location': data.get('location', ''),
+                        'cusine': data.get('cusine', '')
+                    }
+
+                    menu_items = []
+                    for category_group in data['menu']:
+                        if 'items' in category_group:
+                            for item_dict in category_group['items']:
+                                # Add category to item_dict if not present
+                                if 'category' not in item_dict:
+                                    item_dict['category'] = category_group['category']
+                                menu_items.append(MenuItem.from_dict(item_dict))
+                    return menu_items
+                else:
+                    return []
         except (FileNotFoundError, json.JSONDecodeError):
             return []
 
     def save_menu(self): #Saves the current menu (list of objects) back to the JSON file.
-        # Convert each MenuItem object back to a dictionary before saving
-        data_to_save = [item.to_dict() for item in self.menu]
+        if self.original_format == 'simple':
+            # Save in simple list format
+            data_to_save = [item.to_dict() for item in self.menu]
+        else:
+            # Save in nested format
+            # Group items by category
+            categories = {}
+            for item in self.menu:
+                if item.category not in categories:
+                    categories[item.category] = []
+                categories[item.category].append(item.to_dict())
+
+            # Create the nested structure
+            menu_structure = []
+            category_id = 1
+            for category_name, items in categories.items():
+                menu_structure.append({
+                    "category": category_name,
+                    "id": category_id,
+                    "items": items
+                })
+                category_id += 1
+
+            data_to_save = {
+                "name": self.restaurant_info.get('name', ''),
+                "location": self.restaurant_info.get('location', ''),
+                "cusine": self.restaurant_info.get('cusine', ''),
+                "menu": menu_structure
+            }
+
         with open(self.filepath, 'w') as file:
             json.dump(data_to_save, file, indent=4)
 
