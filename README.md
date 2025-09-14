@@ -40,22 +40,26 @@ Our project follows a clean, multi-file layout with each part serving a clear pu
 4.  Follow the menu options displayed in the terminal or console window below to operate the application.
 
 ## Examples
+```text
 ======= Restaurant Management System =======
-  1. View Menu (All Items)
-  2. View Menu by Category
-  3. Search Menu
-  4. Add New Item
-  5. Update Item
-  6. Delete Item
-  0. Exit and Save
-========================================
-Enter your choice (0-6): 4
+1. View Menu (All Items)
+2. View Menu by Category
+3. Search Menu
+4. Add New Item
+5. Update Item
+6. Delete Item
+0. Exit and Save
+===========================================
+
+Enter your choice (0–6): 4
 Enter item name: Korean BBQ Wings
 Enter item category: Entree
 Enter item price: 16.99
 Successfully added 'Korean BBQ Wings' with ID 24.
-========================================
-Enter your choice (0-6): 5
+
+===========================================
+
+Enter your choice (0–6): 5
 Enter the ID of the item to update: 1
 Updating item: Kimchi Pancake. Press Enter to skip.
 New name (current: Kimchi Pancake): Kimchi Fried Rice
