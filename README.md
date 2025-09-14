@@ -66,6 +66,7 @@ New name (current: Kimchi Pancake): Kimchi Fried Rice
 New category (current: Appetizer): Entree
 New price (current: 5.99): 16.99
 Item updated successfully.
+```
 
 ## Team Collaboration and Roles
 
@@ -74,9 +75,9 @@ This project was completed through the collaboration of two students: Grace and 
 * **Grace (Partner A - Backend Architect)**
     * Owner of the branch `main`
     * Mia and Grace designed and wrote the `main.py` file, responsible for calling the backend functions created by Grace to display data to the user, ensuring the application is both user-friendly and stable.
-* Grace also wrote the `Restaurant` class in the `restaurant.py` file, implementing all backend functionalities, including loading/saving the JSON file, and adding, deleting, updating, and searching for items.
+   * Grace also wrote the `Restaurant` class in the `restaurant.py` file, implementing all backend functionalities, including loading/saving the JSON file, and adding, deleting, updating, and searching for items.
 
 * **Mia (Partner B - User Experience Officer)**
    * Owner of the branch `Mia`
-* Responsible for the project's user interface and interaction flow. Mia and Grace designed and wrote the main.py file, creating the main menu and all the prompts that the user sees. 
-* Responsible for the project's core data structure and logic. Mia wrote the menu_item.py file, defining the data model for a single menu item.
+   * Responsible for the project's user interface and interaction flow. Mia and Grace designed and wrote the `main.py` file, creating the main menu and all the prompts that the user sees. 
+   * Responsible for the project's core data structure and logic. Mia wrote the `menu_item.py` file, defining the data model for a single menu item.
