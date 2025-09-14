@@ -1,6 +1,7 @@
 from restaurant import Restaurant
 
-DATA_FILE_PATH = '../data/restaurant_data.json'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # findpath to help run in Visual Studio Code properly
+DATA_FILE_PATH = os.path.join(BASE_DIR, '..', 'data', 'restaurant_data.json')
 
 
 def print_menu_items(items):#print a list of menu items
